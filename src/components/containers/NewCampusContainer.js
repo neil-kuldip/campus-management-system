@@ -77,7 +77,7 @@ const NewCampusContainer = (props) => {
       <div>
         <Header />
         <NewCampusView 
-          handleChange = {handleChange} 
+          handleChange={handleChange} 
           handleSubmit={handleSubmit}      
         />
       </div>          
