@@ -84,12 +84,12 @@ const HomePageView = () => {
     ];
     return (
       <div >
-        <h1>Welcome to the CUNY Campus Directory</h1>
+        <h1>CUNY Adminstration Board</h1>
         <div>
           {adminBoardNames.map((member) => (
             <div key={member.id}>
               <h4>{member.name}</h4>
-              <h6>{member.position}</h6>
+              <h5>{member.position}</h5>
             </div>
           ))}
         </div>
