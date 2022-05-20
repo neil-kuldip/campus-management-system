@@ -50,7 +50,7 @@ const Header = () => {
       <AppBar position="static" elevation={0} className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title} color="inherit" >
-            Campus Management System
+            CUNY Campus Management System
           </Typography>
 
           <Link className={classes.links} to={'/'} >
@@ -61,13 +61,13 @@ const Header = () => {
 
           <Link className={classes.links} to={'/campuses'} >
             <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
-              All Campuses
+              All CUNY Campuses
             </Button>
           </Link>
 
           <Link className={classes.links} to={'/students'} >
             <Button variant="contained" color="primary">
-              All Students
+              All CUNY Students
             </Button>
           </Link>
         </Toolbar>

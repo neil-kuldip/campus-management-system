@@ -8,14 +8,14 @@ import Header from './Header';
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchAllCampusesThunk } from "../../store/thunks";
+import { fetchAllCampusesThunk, deleteCampusThunk } from "../../store/thunks";
 import { AllCampusesView } from "../views";
 
 const AllCampusesContainer = (props) => {
 
   // Get all campuses data from back-end database
     useEffect(() => {
-        console.log(this.props);
+        console.log(props);
         props.fetchAllCampuses();
     }, []);
 
@@ -24,7 +24,8 @@ const AllCampusesContainer = (props) => {
       <div>
         <Header />
         <AllCampusesView
-          allCampuses={this.props.allCampuses}
+          allCampuses={props.allCampuses}
+          deleteCampus={props.deleteCampus}
         />
       </div>
     );
@@ -43,6 +44,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+    deleteCampus: (campusId) => dispatch(deleteCampusThunk(campusId)),
   };
 };
 

@@ -9,7 +9,8 @@ import {
   StudentContainer,
   AllCampusesContainer,
   AllStudentsContainer,
-  NewStudentContainer
+  NewStudentContainer,
+  NewCampusesContainer
 } from './components/containers';
 
 // if you create separate components for adding/editing 
@@ -20,12 +21,13 @@ const App = () => {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={HomePageContainer} />
-        <Route exact path="/campuses" component={AllCampusesContainer} />
-        <Route exact path="/campus/:id" component={CampusContainer} />
-        <Route exact path="/students" component={AllStudentsContainer} />
-        <Route exact path="/newstudent" component={NewStudentContainer} />
-        <Route exact path="/student/:id" component={StudentContainer} />
+        <Route exact path="/" component={<HomePageContainer />} />
+        <Route exact path="/campuses" component={<AllCampusesContainer />} />
+        <Route exact path="/campus/:id" component={<CampusContainer />} />
+        <Route exact path="/students" component={<AllStudentsContainer />} />
+        <Route exact path="/newstudent" component={<NewStudentContainer />} />
+        <Route exact path="/student/:id" component={<StudentContainer />} />
+        <Route exact path="/newcampus" component={<NewCampusesContainer />} />
       </Switch>        
     </div>
   );

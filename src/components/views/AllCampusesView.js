@@ -6,9 +6,9 @@ It constructs a React component to display all campuses.
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const AllCampusesView = (props) => {
+const AllCampusesView = ({ campus, deleteCampus, allCampuses }) => {
   // If there is no campus, display a message.
-  if (!props.allCampuses.length) {
+  if (!allCampuses.length) {
     return <div>There are no campuses.</div>;
   }
 
@@ -17,19 +17,21 @@ const AllCampusesView = (props) => {
     <div>
       <h1>All Campuses</h1>
 
-      {props.allCampuses.map((campus) => (
+      {allCampuses.map((campus) => (
         <div key={campus.id}>
           <Link to={`/campus/${campus.id}`}>
-            <h2>{campus.name}</h2>
+            <h2>{`Campus Name: ${campus.name}`}</h2>
           </Link>
-          <h4>campus id: {campus.id}</h4>
-          <p>{campus.address}</p>
-          <p>{campus.description}</p>
+          <img src={campus.imageUrl} alt={campus.name} />
+          <h4>{`Campus Id: ${campus.id}`}</h4>
+          <p>{`Campus Address: ${campus.address}`}</p>
+          <p>{`Campus Descrpition: ${campus.description}`}</p>
           <hr/>
+          <button onClick={() => deleteCampus(campus.id)}>Delete Campus</button>
         </div>
       ))}
       <br/>
-      <Link to={`/`}>
+      <Link to={`/newcampus`}>
         <button>Add New Campus</button>
       </Link>
       <br/><br/>

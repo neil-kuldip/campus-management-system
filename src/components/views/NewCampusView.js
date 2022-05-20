@@ -28,34 +28,34 @@ const useStyles = makeStyles( () => ({
   },
 }));
 
-const NewStudentView = (props) => {
+const NewCampusView = (props) => {
   const {handleChange, handleSubmit } = props;
   const classes = useStyles();
 
   // Render a New Student view with an input form
   return (
     <div>
-      <h1>New Student</h1>
+      <h1>New Campus</h1>
 
       <div className={classes.root}>
         <div className={classes.formContainer}>
           <div className={classes.formTitle}>
             <Typography style={{fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e'}}>
-              Add a Student
+              Add a Campus
             </Typography>
           </div>
           <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
-            <label style= {{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
+            <label style= {{color:'#11153e', fontWeight: 'bold'}}>Campus Name: </label>
             <input type="text" name="firstname" onChange ={(e) => handleChange(e)} />
             <br/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Address: </label>
             <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Descrpition: </label>
             <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
@@ -72,4 +72,4 @@ const NewStudentView = (props) => {
   )
 }
 
-export default NewStudentView;
+export default NewCampusView;
