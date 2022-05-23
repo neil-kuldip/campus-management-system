@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 
-const StudentView = (props) => {
-    const { student, campus } = props;
-  
-    if (!campus.length) {
+const StudentView = ({ student }) => {
+    if (!student.campus) {
       return (
       <div>
         <p>This student is not enrolled in a campus.</p>
@@ -17,10 +15,10 @@ const StudentView = (props) => {
     return (
       <div>
         <h1>{`${student.firstname} ${student.lastname}`}</h1>
-        <h3>{`${student.campus.name}`}</h3>
-        <h3>{`${student.email}`}</h3>
         <img src={student.imageUrl} alt={`${student.firstname} ${student.lastname}`} />
-        <h3>{`${student.gpa}`}</h3>
+        <h3>{`Email: ${student.email}`}</h3>
+        <h3>{`GPA: ${student.gpa}`}</h3>
+        <h3>{`Currently Attending: ${student.campus.name}`}</h3>
       </div>
     );
   

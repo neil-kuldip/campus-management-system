@@ -17,25 +17,33 @@ const AllStudentsView = ({ students, deleteStudent }) => {
   return (
     <div>
       <h1>All Students</h1>
-
-      {students.map((student) => {
-          let name = `${student.firstname} ${student.lastname}`;
-          return (
-            <div key={student.id}>
-              <Link to={`/student/${student.id}`}>
-                <h2>{name}</h2>
-              </Link>
-              <button onClick={() => deleteStudent(student.id)}>Delete</button>
-              <hr/>
-            </div>
-          );
-        }
-      )}
-      <br/>
       <Link to={`/newstudent`}>
         <button>Add New Student</button>
       </Link>
-      <br/><br/>
+      <div style={
+        {
+          display: "flex", 
+          flexWrap: "wrap", 
+          flexDirection: "row", 
+          justifyContent: "space-around",
+          textAlign: "center",
+          marginLeft: "2vw"
+        }
+      }>
+        {students.map((student) => {
+            let name = `${student.firstname} ${student.lastname}`;
+            return (
+              <div key={student.id}>
+                <Link to={`/student/${student.id}`}>
+                  <h2>{name}</h2>
+                </Link>
+                <button onClick={() => deleteStudent(student.id)}>Delete</button>
+              </div>
+            );
+          }
+        )}
+      </div>
+      
     </div>
   );
 };

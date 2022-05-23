@@ -1,6 +1,6 @@
 import Header from './Header';
 import React, { useState, useEffect } from "react";
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import NewCampusView from '../views/NewCampusView';
@@ -14,6 +14,8 @@ const NewCampusContainer = (props) => {
     const [description, setDescription] = useState("");
     const [redirect, setRedirect] = useState(null);
     const [redirectId, setRedirectId] = useState(null);
+
+    const dispatch = useDispatch();
 
   // Capture input data when it is entered
   const handleChange = event => {
@@ -47,7 +49,7 @@ const NewCampusContainer = (props) => {
     };
     
     // Add new campus in back-end database
-    let newCampus = await props.addCampus(campus);
+    let newCampus = await dispatch(addCampusThunk(campus));
 
     // Update state, and trigger redirect to show the new campus
     setName(""); 
@@ -84,10 +86,11 @@ const NewCampusContainer = (props) => {
     );
 }
 
-const mapDispatch = (dispatch) => {
-    return({
-        addCampus: (campus) => dispatch(addCampusThunk(campus)),
-    })
-}
+// const mapDispatch = (dispatch) => {
+//     return({
+//         addCampus: (campus) => dispatch(addCampusThunk(campus)),
+//     })
+// }
 
-export default connect(null, mapDispatch)(NewCampusContainer);
+// export default connect(null, mapDispatch)(NewCampusContainer);
+export default NewCampusContainer;

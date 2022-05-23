@@ -1,7 +1,7 @@
 import * as ac from './actions/actionCreators';  // Import Action Creators ("ac" keyword Action Creator)
 const axios = require('axios');
 
-const BACKEND_URL = "http://localhost:5000/";
+const BACKEND_URL = "http://localhost:5000";
 
 // Thunk Creator for All Campuses
 export const fetchAllCampusesThunk = () => async (dispatch) => {

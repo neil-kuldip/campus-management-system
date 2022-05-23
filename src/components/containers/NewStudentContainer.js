@@ -6,7 +6,7 @@ If needed, it also defines the component's "connect" function.
 ================================================== */
 import Header from './Header';
 import React, { useState, useEffect } from "react";
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import NewStudentView from '../views/NewStudentView';
@@ -19,6 +19,8 @@ const NewStudentContainer = (props) => {
     const [campusId, setCampusId] = useState(null);
     const [redirect, setRedirect] = useState(false); 
     const [redirectId, setRedirectId] = useState(null);
+
+    const dispatch = useDispatch();
 
   // Capture input data when it is entered
   const handleChange = event => {
@@ -48,7 +50,7 @@ const NewStudentContainer = (props) => {
     };
     
     // Add new student in back-end database
-    let newStudent = await props.addStudent(student);
+    let newStudent = await dispatch(addStudentThunk(student));
 
     // Update state, and trigger redirect to show the new student
     setFirstName(""); 
@@ -87,13 +89,14 @@ const NewStudentContainer = (props) => {
 // The following input argument is passed to the "connect" function used by "NewStudentContainer" component to connect to Redux Store.
 // The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.
 // The "mapDispatch" calls the specific Thunk to dispatch its action. The "dispatch" is a function of Redux Store.
-const mapDispatch = (dispatch) => {
-    return({
-        addStudent: (student) => dispatch(addStudentThunk(student)),
-    })
-}
+// const mapDispatch = (dispatch) => {
+//     return({
+//         addStudent: (student) => dispatch(addStudentThunk(student)),
+//     })
+// }
 
-// Export store-connected container by default
-// NewStudentContainer uses "connect" function to connect to Redux Store and to read values from the Store 
-// (and re-read the values when the Store State updates).
-export default connect(null, mapDispatch)(NewStudentContainer);
+// // Export store-connected container by default
+// // NewStudentContainer uses "connect" function to connect to Redux Store and to read values from the Store 
+// // (and re-read the values when the Store State updates).
+// export default connect(null, mapDispatch)(NewStudentContainer);
+export default NewStudentContainer;
