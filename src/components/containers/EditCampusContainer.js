@@ -1,21 +1,23 @@
 import Header from './Header';
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect, useParams } from 'react-router-dom';
 
-import NewCampusView from '../views/NewCampusView';
-import { addCampusThunk } from '../../store/thunks';
+import EditCampusView from '../views/EditCampusView';
+import { fetchCampusThunk, editCampusThunk } from '../../store/thunks';
 
-const NewCampusContainer = () => {
-  // Initialize state
-    const [name, setName] = useState(""); 
-    const [imageUrl, setImageUrl] = useState("");
-    const [address, setAddress] = useState(""); 
-    const [description, setDescription] = useState("");
-    const [redirect, setRedirect] = useState(false);
-    const [redirectId, setRedirectId] = useState(null);
-
+const EditCampusContainer = () => {
+    const { id } = useParams();
     const dispatch = useDispatch();
+    const campus = useSelector((state) => state.campus);
+
+  // Initialize state
+    const [name, setName] = useState(campus.name); 
+    const [imageUrl, setImageUrl] = useState(campus.imageUrl);
+    const [address, setAddress] = useState(campus.address); 
+    const [description, setDescription] = useState(campus.description);
+    const [redirect, setRedirect] = useState(false);
+    const [redirectId, setRedirectId] = useState(campus.id);
 
   // Capture input data when it is entered
   const handleChange = event => {
@@ -42,30 +44,32 @@ const NewCampusContainer = () => {
   const handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    let campus = {
+    let campusfield = {
+        id: campus.id,
         name: name,
         imageUrl: imageUrl,
         address: address,
         description: description 
     };
     
-    // Add new campus in back-end database
-    let newCampus = await dispatch(addCampusThunk(campus));
-    // Update state, and trigger redirect to show the new campus
-    setName(""); 
-    setImageUrl(""); 
-    setAddress(""); 
-    setDescription("");
-    setRedirectId(newCampus.id);
+    // Edit the campus in back-end database
+    let editCampus = await dispatch(editCampusThunk(campusfield));
+    // Update state, and trigger redirect to show the edited campus
+    // setName(campus.name); 
+    // setImageUrl(campus.imageUrl); 
+    // setAddress(campus.address); 
+    // setDescription(campus.description);
+    // setRedirectId(campus.id);
     setRedirect(true); 
-    console.log("Campus Id:", newCampus.id);
+    console.log("Campus Id:", campus.id);
   }
 
   // Unmount when the component is being removed from the DOM:
     useEffect(() => {
+        dispatch(fetchCampusThunk(id));
       return () => {
          setRedirect(false);
-         setRedirectId(null);
+         setRedirectId(campus.id);
       }
     }, []);
 
@@ -80,9 +84,10 @@ const NewCampusContainer = () => {
     return (
       <div>
         <Header />
-        <NewCampusView 
+        <EditCampusView 
           handleChange={handleChange} 
-          handleSubmit={handleSubmit}      
+          handleSubmit={handleSubmit}  
+          campus={campus}    
         />
       </div>          
     );
@@ -95,4 +100,4 @@ const NewCampusContainer = () => {
 // }
 
 // export default connect(null, mapDispatch)(NewCampusContainer);
-export default NewCampusContainer;
+export default EditCampusContainer;

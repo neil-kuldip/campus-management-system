@@ -58,7 +58,7 @@ export const fetchCampusThunk = (id) => async (dispatch) => {  // The THUNK
 export const fetchAllStudentsThunk = () => async (dispatch) => {
   try {
     let res = await axios.get(`${BACKEND_URL}/api/students`);  
-    dispatch(ac.fetchAllStudents(res.data));  
+    dispatch(ac.fetchAllStudents(res.data)); 
   } catch(err) {
     console.error(err);
   }

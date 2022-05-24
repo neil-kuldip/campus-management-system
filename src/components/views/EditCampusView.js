@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Create styling for the input form
-const useStyles = makeStyles( () => ({
+const useStyles = makeStyles(() => ({
   formContainer:{  
     width: '500px',
     backgroundColor: '#f0f0f5',
@@ -28,40 +28,41 @@ const useStyles = makeStyles( () => ({
   },
 }));
 
-const NewCampusView = (props) => {
-  const {handleChange, handleSubmit } = props;
+const EditCampusView = (props) => {
+  const {handleChange, handleSubmit, campus } = props;
   const classes = useStyles();
+  console.log("Campus:", campus);
 
   // Render a New Student view with an input form
   return (
     <div>
-      <h1>New Campus</h1>
+      <h1>Edit Campus</h1>
 
       <div className={classes.root}>
         <div className={classes.formContainer}>
           <div className={classes.formTitle}>
             <Typography style={{fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e'}}>
-              Add a Campus
+               Edit Campus
             </Typography>
           </div>
           <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>Campus Name: </label>
-            <input type="text" name="name" onChange ={(e) => handleChange(e)} />
+            <input type="text" name="name" defaultValue={campus.name} onChange ={(e) => handleChange(e)} />
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Image URL: </label>
-            <input type="url" name="imageUrl" onChange={(e) => handleChange(e)} />
+            <input type="url" name="imageUrl" defaultValue={campus.imageUrl} onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Address: </label>
-            <input type="text" name="address" onChange={(e) => handleChange(e)} />
+            <input type="text" name="address" defaultValue={campus.address} onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Descrpition: </label>
-            <input type="text" name="description" onChange={(e) => handleChange(e)} />
+            <input type="text" name="description" defaultValue={campus.description} onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
 
@@ -77,4 +78,4 @@ const NewCampusView = (props) => {
   )
 }
 
-export default NewCampusView;
+export default EditCampusView;
