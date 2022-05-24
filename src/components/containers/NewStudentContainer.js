@@ -17,6 +17,9 @@ const NewStudentContainer = (props) => {
     const [firstName, setFirstName] = useState(""); 
     const [lastName, setLastName] = useState("");
     const [campusId, setCampusId] = useState(null);
+    const [imageUrl, setImageUrl] = useState("");
+    const [email, setEmail] = useState("");
+    const [gpa, setGpa] = useState(0.00);
     const [redirect, setRedirect] = useState(false); 
     const [redirectId, setRedirectId] = useState(null);
 
@@ -25,14 +28,23 @@ const NewStudentContainer = (props) => {
   // Capture input data when it is entered
   const handleChange = event => {
     switch(event.target.name) {
-        case firstName:
+        case "firstname":
              setFirstName(event.target.value);
              break;
-        case lastName:
+        case "lastname":
             setLastName(event.target.value);
             break;
-        case campusId:
+        case "campusId":
             setCampusId(event.target.value);
+            break;
+        case "imageUrl":
+            setImageUrl(event.target.value);
+            break;
+        case "email":
+            setEmail(event.target.value);
+            break;
+        case "gpa":
+            setGpa(event.target.value);
             break;
         default:
             break;
@@ -46,6 +58,9 @@ const NewStudentContainer = (props) => {
     let student = {
         firstname: firstName,
         lastname: lastName,
+        imageUrl: imageUrl,
+        email: email,
+        gpa: gpa,
         campusId: campusId
     };
     
@@ -55,9 +70,12 @@ const NewStudentContainer = (props) => {
     // Update state, and trigger redirect to show the new student
     setFirstName(""); 
     setLastName(""); 
+    setImageUrl("");
+    setEmail("");
+    setGpa(0.00);
     setCampusId(null); 
-    setRedirect(true); 
     setRedirectId(newStudent.id);
+    setRedirect(true); 
   }
 
   // Unmount when the component is being removed from the DOM:
@@ -80,7 +98,7 @@ const NewStudentContainer = (props) => {
         <Header />
         <NewStudentView 
           handleChange = {handleChange} 
-          handleSubmit={handleSubmit}      
+          handleSubmit={handleSubmit}   
         />
       </div>          
     );
