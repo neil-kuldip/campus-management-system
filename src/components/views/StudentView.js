@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const StudentView = ({ student }) => {
+
     if (!student.campus) {
       return (
       <div>
